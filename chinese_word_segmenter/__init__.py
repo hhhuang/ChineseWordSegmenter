@@ -50,6 +50,8 @@ class ChineseWordSegmenter:
         return tp, fp, len(actual_toks)
 
     def score(self, actual_sents, pred_sents):
+        print("Number of actual sents: ", len(actual_sents))
+        print("Number of predicted sents: ", len(pred_sents))
         tp = 0
         fp = 0
         total = 0
@@ -135,7 +137,9 @@ class ChineseWordSegmenter:
                     test_data.append(line.strip().split("　"))   # It is a full white space
         elif size > 0:
             test_data = test_data[:size]
-                
+        
+        print("Number of evaluation data: %d" % len(test_data))
+        print(test_data[-10:])
         pred = []
         for s in ["".join(sent) for sent in test_data]:
             pred.append(self.tokenize(s))
@@ -207,4 +211,4 @@ if __name__ == "__main__":
     cws = ChineseWordSegmenter()
     #cws.train()
     print(cws.tokenize("法國總統馬克宏已到現場勘災，初步傳出火警可能與目前聖母院的維修工程有關。"))
-    print(cws.eval(size=100))
+    print(cws.eval(size=150))
