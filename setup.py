@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='TraditionalChineseWordSegmenter',
+    name='chinese_word_segmenter',
     version='0.1',
-    packages=["chinese_word_segmenter"],
-    package_dir={"chinese_word_segmenter": "."},
+    packages=find_packages(),
     license='MIT License',
     description='A BERT-based Chinese Word Segmentation Model Specific to Traditional Chinese (zh_TW)',
     long_description=open('README.md').read(),
