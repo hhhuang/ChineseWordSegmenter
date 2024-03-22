@@ -13,7 +13,7 @@ __version__ = "0.1"
 class ChineseWordSegmenter:
     def __init__(self):
         self.model_args = NERArgs()
-        self.data_dir = str(pathlib.Path(__file__).parent.resolve() / "data")
+        self.data_dir = str(pathlib.Path(__file__).parent.resolve())
         self.model_path = str(pathlib.Path(__file__).parent.resolve() / "trained_model")
         self.model_args.output_dir = os.path.join(self.model_path, "outputs")
         self.model_args.train_batch_size = 32
