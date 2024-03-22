@@ -4,7 +4,7 @@ setup(
     name='TraditionalChineseWordSegmenter',
     version='0.1',
     packages=["chinese-word-segmenter"],
-    packages_dir=["": "chinese-word-segmenter"]
+    package_dir=["chinese-word-segmenter": "."],
     license='MIT License',
     description='A BERT-based Chinese Word Segmentation Model Specific to Traditional Chinese (zh_TW)',
     long_description=open('README.md').read(),
@@ -18,7 +18,7 @@ setup(
     ],
     url='https://github.com/hhhuang/ChineseWordSegmenter',
     author='Hen-Hsen Huang',
-    author_email='hhhuang@iis.sinica.edu.tw',
+    author_email='huangs@gmail.com',
     classifiers=[
         # Classifiers help users find your project by categorizing it.
         
