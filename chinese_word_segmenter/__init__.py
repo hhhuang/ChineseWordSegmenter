@@ -151,9 +151,13 @@ class ChineseWordSegmenter:
     def load_model(self):
         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-chinese")
         if not os.path.isdir(self.model_args.output_dir):
-            r = requests.get("https://github.com/hhhuang/ChineseWordSegmenter/raw/main/chinese_word_segmenter/trained_model/outputs.zip?download=")
-            z = zipfile.ZipFile(io.BytesIO(r.content))
-            z.extractall(self.model_path)
+            with io.BytesIO() as content:
+                for modelfile in ["modelaa", "modelab", "modelac", "modelad"]:
+                    with open(os.path.join(self.model_path, modelfile), "rb") as f:
+                        content.write(f.read())
+                z = zipfile.ZipFile(content)
+                z.extractall(self.model_path)
+
         self.model = NERModel("bert", 
             self.model_args.output_dir, 
             args=self.model_args, 
