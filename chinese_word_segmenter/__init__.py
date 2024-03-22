@@ -8,6 +8,8 @@ import torch
 from simpletransformers.ner import NERModel, NERArgs
 from transformers import AutoTokenizer, AutoModel, utils, AutoModelForTokenClassification
 
+__version__ = "0.1"
+
 class BertChineseWordSegmenter:
     def __init__(self):
         self.model_args = NERArgs()
@@ -146,7 +148,7 @@ class BertChineseWordSegmenter:
     def load_model(self):
         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-chinese")
         if not os.path.isdir(self.model_args.output_dir):
-            r = requests.get("https://github.com/hhhuang/chinese-word-segmentation/raw/main/trained_model/outputs.zip?download=")
+            r = requests.get("https://github.com/hhhuang/ChineseWordSegmenter/raw/main/chinese_word_segmenter/trained_model/outputs.zip?download=")
             z = zipfile.ZipFile(io.BytesIO(r.content))
             z.extractall(self.model_path)
         self.model = NERModel("bert", 
