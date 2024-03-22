@@ -10,7 +10,7 @@ from transformers import AutoTokenizer, AutoModel, utils, AutoModelForTokenClass
 
 __version__ = "0.1"
 
-class BertChineseWordSegmenter:
+class ChineseWordSegmenter:
     def __init__(self):
         self.model_args = NERArgs()
         self.data_dir = str(pathlib.Path(__file__).parent.resolve() / "data")
@@ -81,6 +81,7 @@ class BertChineseWordSegmenter:
     def load_data(self):
         raw_train = []
         raw_test = []
+        #   Training/test data were provided by http://sighan.cs.uchicago.edu/bakeoff2005/
         with open(os.path.join(self.data_dir, "as_training.utf8"), encoding="utf8") as fin:
             for line in fin:
                 raw_train.append(line.strip().split("　"))   # It is a full white space
@@ -117,13 +118,15 @@ class BertChineseWordSegmenter:
                 break
         return data
 
-    def eval(self, size=100):
-        test_data = []
-        with open(os.path.join(self.data_dir, "as_testing_gold.utf8"), encoding="utf8") as fin:
-            for line in fin:
-                if len(test_data) >= size:
-                    break
-                test_data.append(line.strip().split("　"))   # It is a full white space
+    def eval(self, test_data=[], size=100):
+        if not test_data:
+            with open(os.path.join(self.data_dir, "as_testing_gold.utf8"), encoding="utf8") as fin:
+                for line in fin:
+                    if len(test_data) >= size:
+                        break
+                    test_data.append(line.strip().split("　"))   # It is a full white space
+        else:
+            test_data = test_data[:size]
                 
         pred = []
         for s in ["".join(sent) for sent in test_data]:
@@ -187,7 +190,7 @@ class BertChineseWordSegmenter:
         return tokens
 
 if __name__ == "__main__":
-    cws = BertChineseWordSegmenter()
+    cws = ChineseWordSegmenter()
     #cws.train()
     print(cws.tokenize("法國總統馬克宏已到現場勘災，初步傳出火警可能與目前聖母院的維修工程有關。"))
     print(cws.eval())
