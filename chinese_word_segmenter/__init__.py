@@ -78,10 +78,18 @@ class ChineseWordSegmenter:
                         tags.append('M')
         return tags
 
+    def download_data(self):
+		#   Training/test data were provided by http://sighan.cs.uchicago.edu/bakeoff2005/
+        remote_url = "https://raw.githubusercontent.com/hhhuang/nlp2019fall/master/word_segmentation/"
+        r = requests.get(remote_url + "data/as_training.utf8", allow_redirects=True)
+        open('as_training.utf8', 'wb').write(r.content)
+        r = requests.get(remote_url + "data/as_testing_gold.utf8", allow_redirects=True)
+        open('as_testing_gold.utf8', 'wb').write(r.content)
+
     def load_data(self):
+        self.download_data()
         raw_train = []
         raw_test = []
-        #   Training/test data were provided by http://sighan.cs.uchicago.edu/bakeoff2005/
         with open(os.path.join(self.data_dir, "as_training.utf8"), encoding="utf8") as fin:
             for line in fin:
                 raw_train.append(line.strip().split("　"))   # It is a full white space
@@ -118,14 +126,13 @@ class ChineseWordSegmenter:
                 break
         return data
 
-    def eval(self, test_data=[], size=100):
+    def eval(self, test_data=[], size=-1):
+        self.download_data()
         if not test_data:
             with open(os.path.join(self.data_dir, "as_testing_gold.utf8"), encoding="utf8") as fin:
                 for line in fin:
-                    if len(test_data) >= size:
-                        break
                     test_data.append(line.strip().split("　"))   # It is a full white space
-        else:
+        elif size > 0:
             test_data = test_data[:size]
                 
         pred = []
@@ -151,10 +158,12 @@ class ChineseWordSegmenter:
     def load_model(self):
         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-chinese")
         if not os.path.isdir(self.model_args.output_dir):
+            print("Starting to download trained model")
             with io.BytesIO() as content:
                 for modelfile in ["modelaa", "modelab", "modelac", "modelad"]:
-                    with open(os.path.join(self.model_path, modelfile), "rb") as f:
-                        content.write(f.read())
+                    r = requests.get("https://github.com/hhhuang/ChineseWordSegmenter/raw/main/chinese_word_segmenter/trained_model/%s?download=" % modelfile)
+                    print("%s is downloaded with %d" % (modelfile, len(r.content)))
+                    content.write(r.content)
                 z = zipfile.ZipFile(content)
                 z.extractall(self.model_path)
 
@@ -197,4 +206,4 @@ if __name__ == "__main__":
     cws = ChineseWordSegmenter()
     #cws.train()
     print(cws.tokenize("法國總統馬克宏已到現場勘災，初步傳出火警可能與目前聖母院的維修工程有關。"))
-    print(cws.eval())
+    print(cws.eval(size=100))
