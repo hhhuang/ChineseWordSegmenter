@@ -82,9 +82,9 @@ class ChineseWordSegmenter:
 		#   Training/test data were provided by http://sighan.cs.uchicago.edu/bakeoff2005/
         remote_url = "https://raw.githubusercontent.com/hhhuang/nlp2019fall/master/word_segmentation/"
         r = requests.get(remote_url + "data/as_training.utf8", allow_redirects=True)
-        open('as_training.utf8', 'wb').write(r.content)
+        open(os.path.join(self.data_dir, 'as_training.utf8'), 'wb').write(r.content)
         r = requests.get(remote_url + "data/as_testing_gold.utf8", allow_redirects=True)
-        open('as_testing_gold.utf8', 'wb').write(r.content)
+        open(os.path.join(self.data_dir, 'as_testing_gold.utf8'), 'wb').write(r.content)
 
     def load_data(self):
         self.download_data()
@@ -93,7 +93,6 @@ class ChineseWordSegmenter:
         with open(os.path.join(self.data_dir, "as_training.utf8"), encoding="utf8") as fin:
             for line in fin:
                 raw_train.append(line.strip().split("　"))   # It is a full white space
-
         with open(os.path.join(self.data_dir, "as_testing_gold.utf8"), encoding="utf8") as fin:
             for line in fin:
                 raw_test.append(line.strip().split("　"))   # It is a full white space
@@ -131,6 +130,8 @@ class ChineseWordSegmenter:
         if not test_data:
             with open(os.path.join(self.data_dir, "as_testing_gold.utf8"), encoding="utf8") as fin:
                 for line in fin:
+                    if size > 0 and len(test_data) >= size:
+                        break
                     test_data.append(line.strip().split("　"))   # It is a full white space
         elif size > 0:
             test_data = test_data[:size]
