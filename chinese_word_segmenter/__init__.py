@@ -143,12 +143,7 @@ class ChineseWordSegmenter:
         print(test_data[-10:])
         pred = []
         for s in ["".join(sent) for sent in test_data]:
-            try:
-                pred.append(self.tokenize(s))
-            except Error as e:
-                print(e)
-                print(s)
-            
+            pred.append(self.tokenize(s))
         print(test_data[0], pred[0])
         return self.score(test_data, pred)
 
@@ -199,7 +194,12 @@ class ChineseWordSegmenter:
         if self.model is None:
             self.load_model()
         sents = [" ".join(list(s)) for s in self.sent_tokenize(text)]
-        predictions, _ = self.model.predict(sents)
+        try:
+            predictions, _ = self.model.predict(sents)
+        except Exception as e:
+            print(text)
+            print(sents)
+            print(e)
         tokens = []
         for prediction in predictions:
             tok = ""
