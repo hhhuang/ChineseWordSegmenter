@@ -194,6 +194,8 @@ class ChineseWordSegmenter:
         if self.model is None:
             self.load_model()
         sents = [" ".join(list(s)) for s in self.sent_tokenize(text) if s]
+        if not sents:
+            return []
         try:
             predictions, _ = self.model.predict(sents)
         except Exception as e:
