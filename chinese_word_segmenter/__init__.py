@@ -127,15 +127,16 @@ class ChineseWordSegmenter:
                 break
         return data
 
-    def eval(self, test_data=[], size=-1):
+    def eval(self, test_data=None, size=None):
         self.download_data()
-        if not test_data:
+        if test_data is None:
+            test_data = []
             with open(os.path.join(self.data_dir, "as_testing_gold.utf8"), encoding="utf8") as fin:
                 for line in fin:
-                    if size > 0 and len(test_data) >= size:
+                    if size is not None and len(test_data) >= size:
                         break
                     test_data.append(line.strip().split("　"))   # It is a full white space
-        elif size > 0:
+        elif size is not None:
             test_data = test_data[:size]
         
         print("Number of evaluation data: %d" % len(test_data))
@@ -211,4 +212,4 @@ if __name__ == "__main__":
     cws = ChineseWordSegmenter()
     #cws.train()
     print(cws.tokenize("法國總統馬克宏已到現場勘災，初步傳出火警可能與目前聖母院的維修工程有關。"))
-    print(cws.eval(size=150))
+    print(cws.eval(size=100))
