@@ -1,10 +1,14 @@
 # A BERT-based Chinese Word Segmentation Model for Traditional Chinese (zh_TW)
 A Transformer-based Chinese word segmentation model trained on Traditional Chinese Data specific to zh_TW
 
-This is NOT a sophisticated NLP study for Chinese word segmentation. Instead, this project is intended to provide a handy, easy to use but powerful deep learning based Chinese word segmentation model. 
-There are so many github projects for Chinese word segmentation that are publiched on top CL/NLP conferences. Although they perform at the state-of-the-art level, however, none of them are as easy to use as [jieba](https://pypi.org/project/jieba/), which can be easily installed by using `pip` and everything is ready. 
+This is NOT a sophisticated NLP study for Chinese word segmentation. 
+Instead, this project is intended to provide a handy, easy to use but powerful deep learning based Chinese word segmentation model. 
+There are so many github projects for Chinese word segmentation that are publiched on top CL/NLP conferences.
+Although they perform at the state-of-the-art level, however, none of them are as easy to use as [jieba](https://pypi.org/project/jieba/), which can be easily installed by using `pip`. 
 
-In project is for the case when you just need a handy but powerful, state-of-the-art Chinese word segmentation model. This Chinese word segmentation can be easily installed with single `pip`. The large pretrained Transformer model will be automatically download and everything will be okay within a couple of seconds. 
+In project is for the case when you just need a handy but powerful, state-of-the-art Chinese word segmentation model. 
+This Chinese word segmentation can be easily installed with single `pip`. 
+The large pretrained Transformer model will be automatically downloaded and everything will get ready within a couple of seconds. 
 
 ## Installation
 
