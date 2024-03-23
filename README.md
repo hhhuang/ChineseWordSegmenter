@@ -11,15 +11,13 @@ This Chinese word segmentation can be easily installed with single `pip`.
 The large pretrained Transformer model will be automatically downloaded and everything will get ready within a couple of seconds. 
 
 ## Installation
-.
-```
+```bash
 !pip install git+https://github.com/hhhuang/ChineseWordSegmenter.git
 ```
 
 The large model will be automatically downloaded at the first time. 
 
 ## Usage
-
 ```python
 from chinese_word_segmenter import ChineseWordSegmenter
 cws = ChineseWordSegmenter()
