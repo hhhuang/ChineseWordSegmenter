@@ -143,7 +143,12 @@ class ChineseWordSegmenter:
         print(test_data[-10:])
         pred = []
         for s in ["".join(sent) for sent in test_data]:
-            pred.append(self.tokenize(s))
+            try:
+                pred.append(self.tokenize(s))
+            except Error as e:
+                print(e)
+                print(s)
+            
         print(test_data[0], pred[0])
         return self.score(test_data, pred)
 
