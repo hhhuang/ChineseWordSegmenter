@@ -11,7 +11,7 @@ This Chinese word segmentation can be easily installed with single `pip`.
 The large pretrained Transformer model will be automatically downloaded and everything will get ready within a couple of seconds. 
 
 ## Installation
-
+.
 ```
 !pip install git+https://github.com/hhhuang/ChineseWordSegmenter.git
 ```
@@ -19,13 +19,19 @@ The large pretrained Transformer model will be automatically downloaded and ever
 The large model will be automatically downloaded at the first time. 
 
 ## Usage
-```
+
+```python
 from chinese_word_segmenter import ChineseWordSegmenter
 cws = ChineseWordSegmenter()
-print(cws.tokenize("法國總統馬克宏已到現場勘災，初步傳出火警可能與目前聖母院的維修工程有關。"))
+cws.tokenize("法國總統馬克宏已到現場勘災，初步傳出火警可能與目前聖母院的維修工程有關。")
 ```
 
-Note that the `max_seq_length` of this model is 128. To handle the long input, all the input will be split into clauses by using the punctuation marks `。，！？：；` as delimiter. 
+Sample output:
+```
+['法國', '總統', '馬克宏', '已', '到', '現場', '勘災', '，', '初步', '傳出', '火警', '可能', '與', '目前', '聖母院', '的', '維修', '工程', '有關', '。']
+```
+
+Note that the `max_seq_length` of this model is 128. To handle the long input, all the input will be automatically split into clauses by using the punctuation marks `。，！？：；` as delimiter. 
 
 ## Technical Information
 This model was built on the Transformer text-encoder BERT and fine-tuned on the Traditional Chinese word segmentation corpus.
