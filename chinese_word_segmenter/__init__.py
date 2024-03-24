@@ -166,7 +166,7 @@ class ChineseWordSegmenter:
         if not os.path.isdir(self.model_args.output_dir):
             print("Starting to download trained model")
             with io.BytesIO() as content:
-                for modelfile in ["modelaa", "modelab", "modelac", "modelad"]:
+                for modelfile in ["model_aa", "model_ab", "model_ac", "model_ad", "model_ae", "model_af", "model_ag", "model_ah"]:
                     r = requests.get("https://github.com/hhhuang/ChineseWordSegmenter/raw/main/chinese_word_segmenter/trained_model/%s?download=" % modelfile)
                     print("%s is downloaded with %d" % (modelfile, len(r.content)))
                     content.write(r.content)
