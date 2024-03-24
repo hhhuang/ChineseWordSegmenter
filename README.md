@@ -41,5 +41,6 @@ The implementation is simply based on the [simpletransformers.NERModel](https://
 | Test Data | Precision | Recall | F-score | Setting |
 | --------- | --------- | ------ | ------- | ------- |
 |           |  0.9615   | 0.9694 | 0.9654  | 1 Epoch |
+|           |  0.9614   | 0.9688 | 0.9651  | 2 Epoch |
 | AS (zh_TW)|  0.9600   | 0.9702 | 0.9651  | 3 Epoch |
 |           |  0.9624   | 0.9705 | 0.9664  | 5 Epoch |              
