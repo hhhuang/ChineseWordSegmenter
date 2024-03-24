@@ -41,7 +41,7 @@ The batch size is 32, and the number of epoch is 5.
 
 Test data: The golden testset in CKIP Academia Sinica Corpus (zh_TW) used in [the Second International Chinese Word Segmentation Bakeoff at the 4th SIGHAN Workshop (2005)](http://sighan.cs.uchicago.edu/bakeoff2005/). 
 
-| Test Data | Precision | Recall | F-score | 
+| Model | Precision | Recall | F-score | 
 | --------- | --------- | ------ | ------- | 
 | [jieba-tw](https://github.com/APCLab/jieba-tw)  |  0.8779   | 0.8953 | 0.8865  |
 | Our Model |  0.9624   | 0.9705 | 0.9664  |              
