@@ -35,12 +35,10 @@ Note that the `max_seq_length` of this model is 128. To handle the long input, a
 This model was built on the Transformer text-encoder BERT and fine-tuned on the Traditional Chinese word segmentation corpus.
 The corpus is from CKIP, Academia Sinica, Taiwan released by [the Second International Chinese Word Segmentation Bakeoff at the 4th SIGHAN Workshop (2005)](http://sighan.cs.uchicago.edu/bakeoff2005/). 
 The implementation is simply based on the [simpletransformers.NERModel](https://simpletransformers.ai/docs/ner-model/) with the LMRS scheme, with which every Chinese character will be labeled as Leftmost, Middle, Rightmost, or Single. 
+The batch size is 32, and the number of epoch is 5.
 
 ## Evaluation
 
-| Test Data | Precision | Recall | F-score | Setting |
-| --------- | --------- | ------ | ------- | ------- |
-|           |  0.9615   | 0.9694 | 0.9654  | 1 Epoch |
-|           |  0.9614   | 0.9688 | 0.9651  | 2 Epoch |
-| AS (zh_TW)|  0.9600   | 0.9702 | 0.9651  | 3 Epoch |
-|           |  0.9624   | 0.9705 | 0.9664  | 5 Epoch |              
+| Test Data | Precision | Recall | F-score | 
+| --------- | --------- | ------ | ------- | 
+| AS (zh_TW)|  0.9624   | 0.9705 | 0.9664  |              
